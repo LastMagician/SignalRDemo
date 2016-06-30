@@ -19,7 +19,11 @@
              $(function () {
                 var moveShapeHub = $.connection.moveShapeHub,
                 $shape = $("#shape"),
+                // Send a maximum of 10 messages per second 
+                // (mouse movements trigger a lot of messages)
                 messageFrequency = 10,
+                // Determine how often to send messages in
+                // time to abide by the messageFrequency
                 updateRate = 1000 / messageFrequency,
                 shapeModel = {
                     left: 0,
@@ -38,11 +42,12 @@
                             moved = true;
                         }
                     });
-
+                    // Start the client side server update interval
                     setInterval(updateServerModel, updateRate);
                 });
 
                 function updateServerModel() {
+                    // Only update server if we have a new movement
                     if (moved) {
                         moveShapeHub.server.updateModel(shapeModel);
                         moved = false;

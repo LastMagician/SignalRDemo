@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using System.Threading;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace MoveShapeDemo
 {
@@ -60,6 +61,7 @@ namespace MoveShapeDemo
         }
     }
 
+    [HubName("MoveShapeHub")]
     public class MoveShapeHub : Hub
     {
         // Is set via the constructor on each creation
